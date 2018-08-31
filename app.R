@@ -15,5 +15,6 @@ country="Nigeria"
 rootUP=270
 investment=300
 
+#output here
 n <- FR_recommendation(lat, long, IntendedPlantingDate, country, rootUP, investment)
 
