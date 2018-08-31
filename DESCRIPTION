@@ -1,11 +1,11 @@
-Package: appdemo
+Package: fertilizer
 Type: Package
-Title: Fertilizer Estimate Application
-Version: 1.0
-Date: 2018-08-31
+Title: This package calculates fertilizer estimates and all
+Version: 0.1.0
 Author: Sammy Barasa
-Maintainer: Sammy Barasa <barsamms@gmail.com>
-Description: This package is an example of an OpenCPU App. It demonstrates
-    basic functionality of the API and Javascript library.
-License: Apache2
+Maintainer: Sammy Barasar <barsamms@gmail.com>
+Description: More about what it does (maybe more than one line)
+    Use four spaces when indenting paragraphs within the Description.
+License: What license is it under?
+Encoding: UTF-8
 LazyData: true
