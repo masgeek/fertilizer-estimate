@@ -179,7 +179,7 @@ NPK_TargetYield_forOutput <- function(NutrUse_soilNPK, N_rate, P_rate, K_rate){
   NutrUse_soilNPK <- merge(NutrUse_soilNPK, tmp, by=c("lat", "long"))
 
   ## max and min yield: actual uptake and crop param. min of N uptake constrianed by availability of P, K and water
-  maxminY <-   plyr::ddply(NutrUse_soilNPK,plyrr::.(lat, long), max_min_yields_tools)
+  maxminY <-   plyr::ddply(NutrUse_soilNPK,plyr::.(lat, long), max_min_yields_tools)
   NutrUse_soilNPK <- merge(NutrUse_soilNPK, maxminY, by=c("lat", "long"))
 
   ## final yield: min yield for combined uptake of 2 nutrients assuming the 3rd is not limiting, should be < WLY, and take meanof the six combinations
