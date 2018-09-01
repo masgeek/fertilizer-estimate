@@ -1,7 +1,7 @@
 Package: fertilizer
 Type: Package
 Title: This package calculates fertilizer estimates and all
-Version: 0.1.0
+Version: 0.1.1
 Author: Sammy Barasa
 Maintainer: Sammy Barasa <barsamms@gmail.com>
 Description: Fertilizer estimate tool for computing yield output and projected price

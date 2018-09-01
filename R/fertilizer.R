@@ -8,10 +8,10 @@
 ## It calls the other functions at different stages as required.
 
 #load libraries
-library(plyr)
-library(dplyr)
-library(reshape2)
-library(tidyr)
+#library(plyr)
+#library(dplyr)
+#library(reshape2)
+#library(tidyr)
 
 require(plyr)
 require(tidyr)
