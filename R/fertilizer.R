@@ -174,7 +174,6 @@ NPK_TargetYield_forOutput <- function(NutrUse_soilNPK, N_rate, P_rate, K_rate){
   #coord <- paste(lat, long)
 
 
-
   ## Actual Uptake of nutrients: crop param + nutrient supply
   tmp <-   plyr::ddply(NutrUse_soilNPK,plyrr::.(lat, long), actual_uptake_tool)
   NutrUse_soilNPK <- merge(NutrUse_soilNPK, tmp, by=c("lat", "long"))
