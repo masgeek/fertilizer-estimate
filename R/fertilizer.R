@@ -7,6 +7,10 @@
 ## This function requires lat, long, IntendedPlantingDate, country="Nigeria", rootUP, investment as input.
 ## It calls the other functions at different stages as required.
 
+#load libraries
+library(plyr)
+library(tidyr)
+
 require(plyr)
 require(tidyr)
 
