@@ -11,6 +11,5 @@ LazyData: true
 RoxygenNote: 6.1.0
 Imports:
     plyr,
-    crplyr,
     reshape2,
     tidyr
