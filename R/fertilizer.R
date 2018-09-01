@@ -183,7 +183,7 @@ NPK_TargetYield_forOutput <- function(NutrUse_soilNPK, N_rate, P_rate, K_rate){
   NutrUse_soilNPK <- merge(NutrUse_soilNPK, maxminY, by=c("lat", "long"))
 
   ## final yield: min yield for combined uptake of 2 nutrients assuming the 3rd is not limiting, should be < WLY, and take meanof the six combinations
-  Target_Yield <- ddply(NutrUse_soilNPK,.(lat, long), quefts_tools)
+  Target_Yield <- plyr::ddply(NutrUse_soilNPK,plyr::.(lat, long), quefts_tools)
   TY <- data.frame(lat=Target_Yield$lat, long=Target_Yield$long, TargetYield=Target_Yield$FinalYield)
 
   return(TY)
