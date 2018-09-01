@@ -382,7 +382,7 @@ NRabove18Cost <- function(ds){
 #' @param rootUP root rpice for fresh wt. ton/ha it is 270 in TZ and  141 for NG
 #' @param investment: how much the farmer is willing to ivest  in USD (currently 200 USD)
 #' @return The estimate array
-FR_recommendation <- function(lat, long, IntendedPlantingDate, country, rootUP, investment){
+recommendation <- function(lat, long, IntendedPlantingDate, country, rootUP, investment){
 
   if(country=="Nigeria"){
     fertilizer <- c("urea", "TSP", "MOP")
@@ -444,8 +444,5 @@ FR_recommendation <- function(lat, long, IntendedPlantingDate, country, rootUP, 
 
 ## get fertilizer recommendtion
 #FR_recommendation(lat=3.65129, long=4.52163, IntendedPlantingDate=150, country="Nigeria", rootUP=270, investment=300)
-
-
-
 
 
