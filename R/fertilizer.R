@@ -7,7 +7,6 @@
 ## This function requires lat, long, IntendedPlantingDate, country="Nigeria", rootUP, investment as input.
 ## It calls the other functions at different stages as required.
 
-
 require(plyr)
 require(tidyr)
 
@@ -150,7 +149,7 @@ quefts_tools <- function(supply_wly){
 
 #' using the output of function "NPK_TargetYield_forinput" and a dat frame per long and lat for intended NPK input
 #' this function calculates the yield that can be obtained for intended NPK rate.
-#' @param NutrUse_soilNPK
+#' @param NutrUse_soilNPK Update Descriptiosn here
 #' @param NPKdata: needs to be provided
 #' @return
 #'
@@ -293,10 +292,10 @@ NUE <- function(HI, CmaxNroots=6.6, CminNroots=2.5, CmaxNtops=17.9, CminNtops=7.
 #' after setting fertilizer recommendation <25 kg/ha Urea, MOP or Nafaka, target yield with the remaining recommended fertilizer is  re-estimated  and
 #'  total cost, gross and net revenue are re calcuated.
 #' @param rootUP cassava root price
-#' @param zone
-#' @param wdd
-#' @param rdd
-#' @param fertilizer
+#' @param zone zone
+#' @param wdd wdd
+#' @param rdd rdd
+#' @param fertilizer fertilizer type
 #' @author Meklit
 #' @export
 Rerun_25kgKa_try <- function(rootUP, wdd, rdd, fertilizer, Quefts_Input_Data){
