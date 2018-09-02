@@ -384,7 +384,9 @@ NRabove18Cost <- function(ds){
 #' @param IntendedPlantingDate controls not to ask recommendation for dates that are not considerd as planing dates in the zone
 #' @param rootUP root rpice for fresh wt. ton/ha it is 270 in TZ and  141 for NG
 #' @param investment: how much the farmer is willing to ivest  in USD (currently 200 USD)
+#' @example recommendation(3.65129,4.52163,150,1,270,300)
 #' @return The estimate array
+#' @export
 recommendation <- function(lat, long, IntendedPlantingDate, countryObj, rootUP, investment){
   if(countryObj==1){
     #Nigeria

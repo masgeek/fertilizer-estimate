@@ -3,3 +3,4 @@
 export(NPK_TargetYield_forOutput)
 export(QUEFTS1_Pedotransfer)
 export(Rerun_25kgKa_try)
+export(recommendation)
