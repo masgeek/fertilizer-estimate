@@ -4,7 +4,7 @@
 \alias{recommendation}
 \title{This function computes the fertilizer estimate}
 \usage{
-recommendation(lat, long, IntendedPlantingDate, country, rootUP,
+recommendation(lat, long, IntendedPlantingDate, countryObj, rootUP,
   investment)
 }
 \arguments{
@@ -14,7 +14,7 @@ recommendation(lat, long, IntendedPlantingDate, country, rootUP,
 
 \item{IntendedPlantingDate}{controls not to ask recommendation for dates that are not considerd as planing dates in the zone}
 
-\item{country}{Country e.g Nigeria, Tanzania}
+\item{countryObj}{Country code 1 is Nigeria 2 is Tanzania this is because the strings are not taken properly here and conversion os hectic}
 
 \item{rootUP}{root rpice for fresh wt. ton/ha it is 270 in TZ and  141 for NG}
 

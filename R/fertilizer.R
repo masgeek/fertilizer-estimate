@@ -380,13 +380,20 @@ NRabove18Cost <- function(ds){
 #' This function computes the fertilizer estimate
 #' @param lat Lattitude
 #' @param long Longitude
-#' @param country Country e.g Nigeria, Tanzania
+#' @param countryObj Country code 1 is Nigeria 2 is Tanzania this is because the strings are not taken properly here and conversion os hectic
 #' @param IntendedPlantingDate controls not to ask recommendation for dates that are not considerd as planing dates in the zone
 #' @param rootUP root rpice for fresh wt. ton/ha it is 270 in TZ and  141 for NG
 #' @param investment: how much the farmer is willing to ivest  in USD (currently 200 USD)
 #' @return The estimate array
-recommendation <- function(lat, long, IntendedPlantingDate, country, rootUP, investment){
+recommendation <- function(lat, long, IntendedPlantingDate, countryObj, rootUP, investment){
+  if(countryObj==1){
+    #Nigeria
+    country <- "Nigeria"
+  }else if(countryObj==2){
+    country <- "Tanzania"
+  }
 
+  #convert teh country object to string
   if(country=="Nigeria"){
     fertilizer <- c("urea", "TSP", "MOP")
     N_cont     <- c(0.46, 0, 0)
