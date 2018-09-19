@@ -5,7 +5,14 @@
 \title{This function computes the fertilizer estimate}
 \usage{
 recommendation(lat, long, IntendedPlantingDate, countryObj, rootUP,
-  investment)
+  investment, harvestDate = 300, farmSize = 2, ureaUse = TRUE,
+  DAPUse = TRUE, NPK171717Use = FALSE, NPK151515Use = FALSE,
+  NPK201010Use = FALSE, NPK251010Use = FALSE, TSPuse = TRUE,
+  SSPUse = FALSE, CANuse = FALSE, NafakaUse = FALSE,
+  MOPUse = FALSE, ureaPrice = 20, DAPPrice = 20,
+  NPK171717price = 20, NPK151515Price = 20, NPK201010Price = 20,
+  NPK251010Price = 20, TSPPrice = 20, SSPPrice = 20, CANPrice = 20,
+  NafakaPrice = 20, MOPPrice = 20)
 }
 \arguments{
 \item{lat}{Lattitude}
@@ -19,6 +26,52 @@ recommendation(lat, long, IntendedPlantingDate, countryObj, rootUP,
 \item{rootUP}{root rpice for fresh wt. ton/ha it is 270 in TZ and  141 for NG}
 
 \item{investment:}{how much the farmer is willing to ivest  in USD (currently 200 USD)}
+
+\item{harvestDate:}{how much the farmer is willing to ivest  in USD (currently 200 USD)}
+
+\item{farmSize:}{how much the farmer is willing to ivest  in USD (currently 200 USD)}
+
+\item{ureaUse:}{boolean value False or True}
+
+\item{DAPUse:}{boolean value False or True}
+
+\item{NPK171717Use:}{boolean value False or True}
+
+\item{NPK201010Use:}{boolean value False or True}
+
+\item{NPK251010Use:}{boolean value False or True}
+
+\item{TSPuse:}{boolean value False or True}
+
+\item{SSPUse:}{boolean value False or True}
+
+\item{CANuse:}{boolean value False or True}
+
+\item{NafakaUse:}{boolean value False or True}
+
+\item{MOPUse:}{boolean value False or True}
+
+\item{ureaPrice:}{Price of specified fertilizer default is 20 USD but it will have to be converted base on the country}
+
+\item{DAPPrice:}{Price of specified fertilizer default is 20 USD but it will have to be converted base on the country}
+
+\item{NPK171717price:}{Price of specified fertilizer default is 20 USD but it will have to be converted base on the country}
+
+\item{NPK151515Price:}{Price of specified fertilizer default is 20 USD but it will have to be converted base on the country}
+
+\item{NPK201010Price:}{Price of specified fertilizer default is 20 USD but it will have to be converted base on the country}
+
+\item{NPK251010Price:}{Price of specified fertilizer default is 20 USD but it will have to be converted base on the country}
+
+\item{TSPPrice:}{Price of specified fertilizer default is 20 USD but it will have to be converted base on the country}
+
+\item{SSPPrice:}{Price of specified fertilizer default is 20 USD but it will have to be converted base on the country}
+
+\item{CANPrice:}{Price of specified fertilizer default is 20 USD but it will have to be converted base on the country}
+
+\item{NafakaPrice:}{Price of specified fertilizer default is 20 USD but it will have to be converted base on the country}
+
+\item{MOPPrice:}{Price of specified fertilizer default is 20 USD but it will have to be converted base on the country}
 }
 \value{
 The estimate array
