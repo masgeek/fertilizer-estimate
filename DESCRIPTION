@@ -1,11 +1,11 @@
 Package: fertilizer
 Type: Package
-Title: This package calculates fertilizer estimates and all
+Title: Fertilizer estimate and recommendation tool
 Version: 0.1.1
 Author: Sammy Barasa
 Maintainer: Sammy Barasa <barsamms@gmail.com>
-Description: Fertilizer estimate tool for computing yield output and projected price
-License: MIT
+Description: Fertilizer estimate tool for computing fertilizer estimate among other  data
+License: GPL
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.0
