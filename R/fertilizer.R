@@ -410,7 +410,7 @@ NRabove18Cost <- function(ds){
 #' @export
 recommendation <-function (lat, long, IntendedPlantingDate, countryObj, rootUP, investment, harvestDate = 300, farmSize=2, ureaUse=TRUE,
                            DAPUse = TRUE, NPK171717Use=FALSE, NPK151515Use=FALSE,NPK201010Use=FALSE, NPK251010Use =FALSE, TSPuse=TRUE,
-                           SSPUse=FALSE, CANuse=FALSE, NafakaUse=FALSE, MOPUse=FALSE, ureaPrice=20, DAPPrice =20, NPK171717price=20,
+                           SSPUse=FALSE, CANuse=FALSE, NafakaUse=FALSE, MOPUse=FALSE, ureaPrice=2000, DAPPrice =20, NPK171717price=20,
                            NPK151515Price=20,NPK201010Price=20, NPK251010Price=20, TSPPrice=20, SSPPrice=20, CANPrice=20, NafakaPrice=20, MOPPrice=20)
 {
   if (countryObj == 1) {
