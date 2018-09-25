@@ -444,7 +444,7 @@ recommendation <-function (lat, long, IntendedPlantingDate, countryObj, rootUP, 
     fertilizer$price <- c(c(c(70000, 120000, 57000) * 0.00045/50),
                           c(c(50000, 65000, 57000) * 0.00045/50), c(c(40000,
                                                                       90000, 57000) * 0.00045/50))
-    #fertilizer <- fertilizer[fertilizer$Zones == zones, ]
+    fertilizer <- fertilizer[fertilizer$Zones == Zones, ]
   }
   WLY_FertRecom <- data.frame(lat = lat, long = long, fert_N = sample(c(seq(60,
                                                                             150, 12)), 1), fert_P = sample(c(seq(30, 80, 7)), 1),
