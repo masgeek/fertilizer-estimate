@@ -436,8 +436,7 @@ recommendation <-function (lat, long, IntendedPlantingDate, countryObj, rootUP, 
     N_cont <- rep(c(0.46, 0, 0, 0.18, 0.17, 0.09, 0.1), 3)
     P_cont <- rep(c(0, 0.2, 0, 0.2, 0.07, 0.07, 0.09), 3)
     K_cont <- rep(c(0, 0, 0.43, 0, 0.12, 0.06, 0), 3)
-    Zones <- c(rep("Lake_zone", 7), rep("Southern_zone",
-                                        7), rep("Eastern_zone", 7))
+    Zones <- c(rep("Lake_zone", 7), rep("Southern_zone",7), rep("Eastern_zone", 7))
     fertilizer <- data.frame(fertilizer, N_cont, P_cont,
                              K_cont, Zones)
     fertilizer <- fertilizer[fertilizer$fertilizer %in% c("urea",
@@ -445,7 +444,7 @@ recommendation <-function (lat, long, IntendedPlantingDate, countryObj, rootUP, 
     fertilizer$price <- c(c(c(70000, 120000, 57000) * 0.00045/50),
                           c(c(50000, 65000, 57000) * 0.00045/50), c(c(40000,
                                                                       90000, 57000) * 0.00045/50))
-    fertilizer <- fertilizer[fertilizer$Zones == zones, ]
+    #fertilizer <- fertilizer[fertilizer$Zones == zones, ]
   }
   WLY_FertRecom <- data.frame(lat = lat, long = long, fert_N = sample(c(seq(60,
                                                                             150, 12)), 1), fert_P = sample(c(seq(30, 80, 7)), 1),
