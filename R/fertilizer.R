@@ -410,7 +410,7 @@ NRabove18Cost <- function(ds){
 #' @export
 recommendation <-function (lat, long, IntendedPlantingDate, countryObj, rootUP, investment, harvestDate = 300, farmSize=2, ureaUse=TRUE,
                            DAPUse = TRUE, NPK171717Use=FALSE, NPK151515Use=FALSE,NPK201010Use=FALSE, NPK251010Use =FALSE, TSPuse=TRUE,
-                           SSPUse=FALSE, CANuse=FALSE, NafakaUse=FALSE, MOPUse=FALSE, ureaPrice=2000, DAPPrice =20, NPK171717price=20,
+                           SSPUse=FALSE, CANuse=FALSE, NafakaUse=FALSE, MOPUse=FALSE, ureaPrice=20, DAPPrice =20, NPK171717price=20,
                            NPK151515Price=20,NPK201010Price=20, NPK251010Price=20, TSPPrice=20, SSPPrice=20, CANPrice=20, NafakaPrice=20, MOPPrice=20)
 {
   if (countryObj == 1) {
@@ -419,6 +419,7 @@ recommendation <-function (lat, long, IntendedPlantingDate, countryObj, rootUP, 
   else if (countryObj == 2) {
     country <- "Tanzania"
   }
+
   if (country == "Nigeria") {
     fertilizer <- c("urea", "TSP", "MOP")
     N_cont <- c(0.46, 0, 0)
@@ -444,7 +445,7 @@ recommendation <-function (lat, long, IntendedPlantingDate, countryObj, rootUP, 
     fertilizer$price <- c(c(c(70000, 120000, 57000) * 0.00045/50),
                           c(c(50000, 65000, 57000) * 0.00045/50), c(c(40000,
                                                                       90000, 57000) * 0.00045/50))
-    fertilizer <- fertilizer[fertilizer$Zones == zone, ]
+    fertilizer <- fertilizer[fertilizer$Zones == zones, ]
   }
   WLY_FertRecom <- data.frame(lat = lat, long = long, fert_N = sample(c(seq(60,
                                                                             150, 12)), 1), fert_P = sample(c(seq(30, 80, 7)), 1),
