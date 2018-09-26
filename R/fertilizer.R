@@ -408,71 +408,88 @@ NRabove18Cost <- function(ds){
 #' @param MOPPrice: Price of specified fertilizer default is 20 USD but it will have to be converted base on the country
 #' @return The estimate array
 #' @export
-recommendation <-function (lat, long, IntendedPlantingDate, countryObj, rootUP, investment, harvestDate = 300, farmSize=2, ureaUse=TRUE,
-                           DAPUse = TRUE, NPK171717Use=FALSE, NPK151515Use=FALSE,NPK201010Use=FALSE, NPK251010Use =FALSE, TSPuse=TRUE,
-                           SSPUse=FALSE, CANuse=FALSE, NafakaUse=FALSE, MOPUse=FALSE, ureaPrice=20, DAPPrice =20, NPK171717price=20,
-                           NPK151515Price=20,NPK201010Price=20, NPK251010Price=20, TSPPrice=20, SSPPrice=20, CANPrice=20, NafakaPrice=20, MOPPrice=20)
-{
-  if (countryObj == 1) {
-    country <- "Nigeria"
-  }
-  else if (countryObj == 2) {
-    country <- "Tanzania"
-  }
+recommendation <-
+  function (lat, long, IntendedPlantingDate, countryObj, rootUP, investment, harvestDate = 300, farmSize=2, ureaUse=TRUE,
+            DAPUse = TRUE, NPK171717Use=FALSE, NPK151515Use=FALSE,NPK201010Use=FALSE, NPK251010Use =FALSE, TSPuse=TRUE,
+            SSPUse=FALSE, CANuse=FALSE, NafakaUse=FALSE, MOPUse=FALSE, ureaPrice=20, DAPPrice =20, NPK171717price=20,
+            NPK151515Price=20,NPK201010Price=20, NPK251010Price=20, TSPPrice=20, SSPPrice=20, CANPrice=20, NafakaPrice=20, MOPPrice=20)
+  {
+    if (countryObj == 1) {
+      country <- "Nigeria"
+    }
+    else if (countryObj == 2) {
+      country <- "Tanzania"
+    }
+    if (country == "Nigeria") {
+      fertilizer <- c("urea", "TSP", "MOP")
+      N_cont <- c(0.46, 0, 0)
+      P_cont <- c(0, 0.2, 0)
+      K_cont <- c(0, 0, 0.5)
+      Zones <- rep("Nigeria", 3)
+      fertilizer <- data.frame(fertilizer, N_cont, P_cont, K_cont)
+      fertilizer$price <- c(0.39, 1, 0.5)
+    }
+    else if (country == "Tanzania") {
+      fertilizer <- rep(c("urea", "TSP", "MOP", "DAP", "NPK171717",
+                          "MPR_nafaka", "MPR_mazao"), 3)
+      N_cont <- rep(c(0.46, 0, 0, 0.18, 0.17, 0.09, 0.1), 3)
+      P_cont <- rep(c(0, 0.2, 0, 0.2, 0.07, 0.07, 0.09), 3)
+      K_cont <- rep(c(0, 0, 0.43, 0, 0.12, 0.06, 0), 3)
+      Zones <- c(rep("Lake_zone", 7), rep("Southern_zone",
+                                          7), rep("Eastern_zone", 7))
+      fertilizer <- data.frame(fertilizer, N_cont, P_cont, K_cont, Zones)
 
-  if (country == "Nigeria") {
-    fertilizer <- c("urea", "TSP", "MOP")
-    N_cont <- c(0.46, 0, 0)
-    P_cont <- c(0, 0.2, 0)
-    K_cont <- c(0, 0, 0.5)
-    Zones <- rep("Nigeria", 3)
-    fertilizer <- data.frame(fertilizer, N_cont, P_cont,
-                             K_cont)
-    fertilizer$price <- c(0.39, 1, 0.5)
+      fertilizer <- fertilizer[fertilizer$fertilizer %in% c("urea",
+                                                            "MPR_nafaka", "MOP"), ]
+      fertilizer$price <- c(c(c(70000, 120000, 57000) * 0.00045/50),
+                            c(c(50000, 65000, 57000) * 0.00045/50),
+                            c(c(40000, 90000, 57000) * 0.00045/50))
+
+      fertilizer <- fertilizer[fertilizer$Zones == zone, ]
+    }
+
+    WLY_FertRecom <- data.frame(lat = lat, long = long,
+                                fert_N = sample(c(seq(60, 150, 12)), 1),
+                                fert_P = sample(c(seq(30, 80, 7)), 1),
+                                fert_K = sample(c(seq(35, 146, 7)), 1),
+                                location = paste(lat, long, sep = "_"),
+                                pl_Date = IntendedPlantingDate,
+                                zone = country)
+
+    water_limited_yield <- sample(c(seq(12000, 17000, 1000)), 1)
+    CurrentYield <- sample(c(seq(5000, 10000, 500)), 1)
+
+    WLY_FertRecom$water_limited_yield <- ifelse(water_limited_yield >
+                                                  CurrentYield, water_limited_yield, CurrentYield)
+    WLY_FertRecom$CurrentYield <- ifelse(water_limited_yield >
+                                           CurrentYield, CurrentYield, water_limited_yield)
+
+    soilGPS <- data.frame(lat = lat, long = long,
+                          soilN = sample(c(seq(28, 200, 25)), 1),
+                          soilP = sample(c(seq(12, 60, 15)), 1),
+                          soilK = sample(c(seq(12, 40, 15)), 1),
+                          rec_N = 0.5, rec_P = 0.15, rec_K = 0.5, rel_N = 1)
+
+    soilGPS$rel_P <- soilGPS$soilP/soilGPS$soilN
+    soilGPS$rel_K <- soilGPS$soilK/soilGPS$soilN
+    soilGPS$latlong <- paste(lat, long, sep = "_")
+    fert_optim <- run_Optim_NG(rootUP = rootUP, QID = soilGPS,
+                               fertilizer = fertilizer, invest = investment, plDate = IntendedPlantingDate,
+                               fert_onePixel = WLY_FertRecom, lat = lat, long = long)
+    fert_optim$urea <- ifelse(fert_optim$urea < 25, 0, fert_optim$urea)
+    fert_optim$MOP <- ifelse(fert_optim$MOP < 25, 0, fert_optim$MOP)
+    fert_optim$TSP <- ifelse(fert_optim$TSP < 25, 0, fert_optim$TSP)
+    Reset_fert_South <- Rerun_25kgKa_try(rootUP = rootUP, wdd = WLY_FertRecom,
+                                         rdd = fert_optim, fertilizer = fertilizer, Quefts_Input_Data = soilGPS)
+    GPS_fertRecom <- NRabove18Cost(ds = Reset_fert_South)
+    if(country == "Nigeria"){
+      GPS_fertRecom$netRev <- round(GPS_fertRecom$netRev *360, digits=0)
+      GPS_fertRecom$totalCost <- round(GPS_fertRecom$totalCost *360,digits=0)
+    }else if (country== "Tanzania"){
+      GPS_fertRecom$netRev <- round(GPS_fertRecom$netRev *360, digits=0)
+      GPS_fertRecom$totalCost <- round(GPS_fertRecom$totalCost * 2280,digits=0)
+    }
+
+
+    return(GPS_fertRecom)
   }
-  else if (country == "Tanzania") {
-    fertilizer <- rep(c("urea", "TSP", "MOP", "DAP", "NPK171717",
-                        "MPR_nafaka", "MPR_mazao"), 3)
-    N_cont <- rep(c(0.46, 0, 0, 0.18, 0.17, 0.09, 0.1), 3)
-    P_cont <- rep(c(0, 0.2, 0, 0.2, 0.07, 0.07, 0.09), 3)
-    K_cont <- rep(c(0, 0, 0.43, 0, 0.12, 0.06, 0), 3)
-    Zones <- c(rep("Lake_zone", 7), rep("Southern_zone",7), rep("Eastern_zone", 7))
-    fertilizer <- data.frame(fertilizer, N_cont, P_cont,
-                             K_cont, Zones)
-    fertilizer <- fertilizer[fertilizer$fertilizer %in% c("urea",
-                                                          "MPR_nafaka", "MOP"), ]
-    fertilizer$price <- c(c(c(70000, 120000, 57000) * 0.00045/50),
-                          c(c(50000, 65000, 57000) * 0.00045/50), c(c(40000,
-                                                                      90000, 57000) * 0.00045/50))
-    fertilizer <- fertilizer[fertilizer$Zones == Zones, ]
-  }
-  WLY_FertRecom <- data.frame(lat = lat, long = long, fert_N = sample(c(seq(60,
-                                                                            150, 12)), 1), fert_P = sample(c(seq(30, 80, 7)), 1),
-                              fert_K = sample(c(seq(35, 146, 7)), 1), location = paste(lat,
-                                                                                       long, sep = "_"), pl_Date = IntendedPlantingDate,
-                              zone = country)
-  water_limited_yield <- sample(c(seq(12000, 17000, 1000)),
-                                1)
-  CurrentYield <- sample(c(seq(7000, 12000, 800)), 1)
-  WLY_FertRecom$water_limited_yield <- ifelse(water_limited_yield >
-                                                CurrentYield, water_limited_yield, CurrentYield)
-  WLY_FertRecom$CurrentYield <- ifelse(water_limited_yield >
-                                         CurrentYield, CurrentYield, water_limited_yield)
-  soilGPS <- data.frame(lat = lat, long = long, soilN = sample(c(seq(28,
-                                                                     200, 25)), 1), soilP = sample(c(seq(12, 80, 15)), 1),
-                        soilK = sample(c(seq(12, 80, 15)), 1), rec_N = 0.5, rec_P = 0.15,
-                        rec_K = 0.5, rel_N = 1)
-  soilGPS$rel_P <- soilGPS$soilP/soilGPS$soilN
-  soilGPS$rel_K <- soilGPS$soilK/soilGPS$soilN
-  soilGPS$latlong <- paste(lat, long, sep = "_")
-  fert_optim <- run_Optim_NG(rootUP = rootUP, QID = soilGPS,
-                             fertilizer = fertilizer, invest = investment, plDate = IntendedPlantingDate,
-                             fert_onePixel = WLY_FertRecom, lat = lat, long = long)
-  fert_optim$urea <- ifelse(fert_optim$urea < 25, 0, fert_optim$urea)
-  fert_optim$MOP <- ifelse(fert_optim$MOP < 25, 0, fert_optim$MOP)
-  fert_optim$TSP <- ifelse(fert_optim$TSP < 25, 0, fert_optim$TSP)
-  Reset_fert_South <- Rerun_25kgKa_try(rootUP = rootUP, wdd = WLY_FertRecom,
-                                       rdd = fert_optim, fertilizer = fertilizer, Quefts_Input_Data = soilGPS)
-  GPS_fertRecom <- NRabove18Cost(ds = Reset_fert_South)
-  return(GPS_fertRecom)
-}
