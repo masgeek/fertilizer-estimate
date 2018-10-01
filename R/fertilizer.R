@@ -3,7 +3,7 @@
 ## the R packages neede to run these functions are "plyr" and "tidyr". THe other packages will be automatically
 ## installed when you download R.
 
-## The Wrapper function is called "FR_recommendation".
+## The Wrapper function is called "recommendation".
 ## This function requires lat, long, IntendedPlantingDate, country="Nigeria", rootUP, investment as input.
 ## It calls the other functions at different stages as required.
 
