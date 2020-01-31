@@ -4,7 +4,7 @@ Title: Fertilizer estimate and recommendation tool
 Version: 0.1.1
 Author: Sammy Barasa
 Maintainer: Sammy Barasa <barsamms@gmail.com>
-Description: Fertilizer estimate tool for computing fertilizer estimate among other  data
+Description: Akilimo computation engine
 License: GPL
 Encoding: UTF-8
 LazyData: true
